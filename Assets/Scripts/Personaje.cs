@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Personaje : MonoBehaviour
 {
@@ -226,4 +227,21 @@ public class Personaje : MonoBehaviour
         animator.SetBool("isUltraShoot", false);
         Debug.Log("Parámetro 'isUltraShoot' se ha restablecido a false en el Animator del jugador.");
     }
+
+    public void SetSuccess()
+    {
+        animator.SetBool("isSuccess", true);
+        Debug.Log("Parámetro 'isSuccess' se establecerá en true en el Animator del jugador.");
+        StartCoroutine(ResetIsSuccess());
+    }
+
+    private IEnumerator ResetIsSuccess()
+    {
+        Debug.Log("Esperando para restablecer 'isSuccess'...");
+        yield return new WaitForSeconds(1.0f);
+        SceneManager.LoadScene(1);
+    }
+
 }
+
+
