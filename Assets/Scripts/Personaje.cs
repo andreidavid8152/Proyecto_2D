@@ -10,6 +10,14 @@ public class Personaje : MonoBehaviour
     public LayerMask capaSuelo;
     public AudioClip sonidoSalto;
 
+    private int shoot2Count = 0;
+    private float shoot2TimeWindow = 3.0f;
+    private float shoot2Timer = 0.0f;
+
+    private int ultraShootCount = 0;
+    private float ultraShootTimeWindow = 3.0f;
+    private float ultraShootTimer = 0.0f;
+
     private Rigidbody2D r;
     private BoxCollider2D b;
     private bool mirandoDerecha = true;
@@ -31,6 +39,64 @@ public class Personaje : MonoBehaviour
     {
         movimiento();
         salto();
+
+        // Llamar a Shoot1 cuando se presione el clic izquierdo del ratón
+        if (Input.GetMouseButtonDown(0)) // 0 es el botón izquierdo del ratón
+        {
+            Shoot1();
+        }
+
+        // Lógica para accionar Shoot2 cuando se presione 3 veces la tecla H en un tiempo de 3s
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            shoot2Count++;
+            if (shoot2Count == 1)
+            {
+                shoot2Timer = shoot2TimeWindow;
+                StartCoroutine(Shoot2Timer());
+            }
+            else if (shoot2Count == 3)
+            {
+                Shoot2();
+                shoot2Count = 0; // Reiniciar el contador
+            }
+        }
+
+        // Decrementar el temporizador para Shoot2
+        if (shoot2Timer > 0)
+        {
+            shoot2Timer -= Time.deltaTime;
+            if (shoot2Timer <= 0)
+            {
+                shoot2Count = 0; // Reiniciar el contador si el tiempo se agota
+            }
+        }
+
+        // Lógica para accionar UltraShoot cuando se presione 4 veces el clic derecho del ratón en un tiempo de 3s
+        if (Input.GetMouseButtonDown(1)) // 1 es el botón derecho del ratón
+        {
+            ultraShootCount++;
+            if (ultraShootCount == 1)
+            {
+                ultraShootTimer = ultraShootTimeWindow;
+                StartCoroutine(UltraShootTimer());
+            }
+            else if (ultraShootCount == 4)
+            {
+                UltraShoot();
+                ultraShootCount = 0; // Reiniciar el contador
+            }
+        }
+
+        // Decrementar el temporizador para UltraShoot
+        if (ultraShootTimer > 0)
+        {
+            ultraShootTimer -= Time.deltaTime;
+            if (ultraShootTimer <= 0)
+            {
+                ultraShootCount = 0; // Reiniciar el contador si el tiempo se agota
+            }
+        }
     }
 
     void movimiento()
@@ -84,5 +150,80 @@ public class Personaje : MonoBehaviour
             r.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
             AudioManager.Instance.ReproducirSonido(sonidoSalto);
         }
+    }
+
+    public void SetDamage()
+    {
+        animator.SetBool("isDamage", true);
+        Debug.Log("Parámetro 'isDamage' se establecerá en true en el Animator del jugador.");
+        StartCoroutine(ResetIsDamage());
+    }
+
+    private IEnumerator ResetIsDamage()
+    {
+        Debug.Log("Esperando para restablecer 'isDamage'...");
+        yield return new WaitForSeconds(0.45f);
+        animator.SetBool("isDamage", false);
+        Debug.Log("Parámetro 'isDamage' se ha restablecido a false en el Animator del jugador.");
+    }
+
+    // Función Shoot1 que establece isShoot1 en true y luego en false después de 0.42 segundos
+    public void Shoot1()
+    {
+        animator.SetBool("isShoot1", true);
+        Debug.Log("Parámetro 'isShoot1' se establecerá en true en el Animator del jugador.");
+        StartCoroutine(ResetIsShoot1());
+    }
+
+    private IEnumerator ResetIsShoot1()
+    {
+        Debug.Log("Esperando para restablecer 'isShoot1'...");
+        yield return new WaitForSeconds(0.42f);
+        animator.SetBool("isShoot1", false);
+        Debug.Log("Parámetro 'isShoot1' se ha restablecido a false en el Animator del jugador.");
+    }
+
+    private IEnumerator Shoot2Timer()
+    {
+        yield return new WaitForSeconds(shoot2TimeWindow);
+        shoot2Count = 0;
+    }
+
+    // Función Shoot2 que establece isShoot2 en true y luego en false después de 0.45 segundos
+    public void Shoot2()
+    {
+        animator.SetBool("isShoot2", true);
+        Debug.Log("Parámetro 'isShoot2' se establecerá en true en el Animator del jugador.");
+        StartCoroutine(ResetIsShoot2());
+    }
+
+    private IEnumerator ResetIsShoot2()
+    {
+        Debug.Log("Esperando para restablecer 'isShoot2'...");
+        yield return new WaitForSeconds(0.45f);
+        animator.SetBool("isShoot2", false);
+        Debug.Log("Parámetro 'isShoot2' se ha restablecido a false en el Animator del jugador.");
+    }
+
+    private IEnumerator UltraShootTimer()
+    {
+        yield return new WaitForSeconds(ultraShootTimeWindow);
+        ultraShootCount = 0;
+    }
+
+    // Función UltraShoot que establece isUltraShoot en true y luego en false después de 1.05 segundos
+    public void UltraShoot()
+    {
+        animator.SetBool("isUltraShoot", true);
+        Debug.Log("Parámetro 'isUltraShoot' se establecerá en true en el Animator del jugador.");
+        StartCoroutine(ResetIsUltraShoot());
+    }
+
+    private IEnumerator ResetIsUltraShoot()
+    {
+        Debug.Log("Esperando para restablecer 'isUltraShoot'...");
+        yield return new WaitForSeconds(1.05f);
+        animator.SetBool("isUltraShoot", false);
+        Debug.Log("Parámetro 'isUltraShoot' se ha restablecido a false en el Animator del jugador.");
     }
 }
