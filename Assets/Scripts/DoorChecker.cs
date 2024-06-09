@@ -23,11 +23,19 @@ public class DoorChecker : MonoBehaviour
                     Debug.LogError("No se encontró un script Personaje en el objeto del jugador.");
                 }
                 AudioManager.Instance.ReproducirSonido(successClip);
+                CompleteLevel(1);  // Asume que este es el nivel 1
             }
             else
             {
                 AudioManager.Instance.ReproducirSonido(failureClip);
             }
         }
+    }
+
+    private void CompleteLevel(int levelIndex)
+    {
+        Debug.Log("Nivel " + levelIndex + " completado.");
+        PlayerPrefs.SetInt("Level" + levelIndex + "Completed", 1);
+        PlayerPrefs.Save();
     }
 }
