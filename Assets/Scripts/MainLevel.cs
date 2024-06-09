@@ -10,6 +10,11 @@ public class MainLevel : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
 
+    public void LoadLevel(int levelIndex)
+    {
+        SceneManager.LoadScene(levelIndex);
+    }
+
     public void Borrar()
     {
 

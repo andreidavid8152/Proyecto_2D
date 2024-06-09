@@ -144,7 +144,7 @@ public class Personaje : MonoBehaviour
 
         enSuelo = sueloActual;
 
-        if (Input.GetKeyDown(KeyCode.Space) && saltosRestantes > 0)
+        if (Input.GetKeyDown(KeyCode.W) && saltosRestantes > 0)
         {
             saltosRestantes--;
             r.velocity = new Vector2(r.velocity.x, 0f);
