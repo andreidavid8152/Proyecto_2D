@@ -50,9 +50,10 @@ public class GameManager : MonoBehaviour
         saludEnemigos.Remove(saludEnemigo);
     }
 
-    public void PerderVidaEnemigo(BarraSaludEnemigo saludEnemigo, int damage)
+    public void PerderVidaEnemigo(BarraSaludEnemigo saludEnemigo, int vidas)
     {
-        saludEnemigo.DesactivarVida(damage);
+        Debug.Log(vidas);
+        saludEnemigo.DesactivarVida(vidas);
     }
 
     public bool RecuperarVida()

@@ -58,7 +58,8 @@ public class Enemigo : MonoBehaviour
     public void RecibirDanio(int damage)
     {
         vidas -= damage;
-        GameManager.Instance.PerderVidaEnemigo(barraSalud, damage);
+        Debug.Log(vidas);
+        GameManager.Instance.PerderVidaEnemigo(barraSalud, vidas);
         if (vidas <= 0)
         {
             GameManager.Instance.EliminarEnemigo(barraSalud);
