@@ -211,26 +211,29 @@ public class Personaje : MonoBehaviour
     // Función Shoot1 que establece isShoot1 en true y luego en false después de 0.42 segundos
     public void Shoot1()
     {
-        Vector3 direction;
         animator.SetBool("isShoot1", true);
-        StartCoroutine(ResetIsShoot1());
-
-        if (transform.localScale.x == 1.0f) direction = Vector2.right;
-        else direction = Vector2.left;
-
-        GameObject bullet = Instantiate(Bullet1Prefab, transform.position + direction, Quaternion.identity);
-        bullet.GetComponent<Bullet>().setDirection(direction);
-
-        Debug.Log("Parámetro 'isShoot1' se establecerá en true en el Animator del jugador.");
-
+        StartCoroutine(ResetIsShoot1AndShootBullet());
     }
 
-    private IEnumerator ResetIsShoot1()
+    private IEnumerator ResetIsShoot1AndShootBullet()
     {
-        Debug.Log("Esperando para restablecer 'isShoot1'...");
+        Debug.Log("Esperando para restablecer 'isShoot1' y disparar bala...");
         yield return new WaitForSeconds(0.42f);
         animator.SetBool("isShoot1", false);
         Debug.Log("Parámetro 'isShoot1' se ha restablecido a false en el Animator del jugador.");
+
+        Vector3 direction;
+        if (transform.localScale.x == 1.0f) direction = Vector2.right;
+        else direction = Vector2.left;
+
+        // Ajuste en la posición de la bala para que salga más abajo
+        Vector3 bulletPosition = transform.position + direction;
+        bulletPosition.y -= 0.70f; // Ajusta este valor según sea necesari
+
+        GameObject bullet = Instantiate(Bullet1Prefab, bulletPosition, Quaternion.identity);
+        bullet.GetComponent<Bullet>().setDirection(direction);
+
+        Debug.Log("Bala disparada después de restablecer 'isShoot1'.");
     }
 
     private IEnumerator Shoot2Timer()

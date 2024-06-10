@@ -23,4 +23,9 @@ public class Bullet : MonoBehaviour
     {
         Direction = direction;
     }
+
+    public void DestroyBullet()
+    {
+        Destroy(gameObject);
+    }
 }
