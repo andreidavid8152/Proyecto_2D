@@ -25,6 +25,10 @@ public class Personaje : MonoBehaviour
     private float ultraShootTimeWindow = 3.0f;
     private float ultraShootTimer = 0.0f;
 
+    public float recoilForceShoot1 = 10.0f;
+    public float recoilForceShoot2 = 2.0f;
+    public float recoilForceUltraShoot = 3.0f;
+
     private Rigidbody2D r;
     private BoxCollider2D b;
     private bool mirandoDerecha = true;
@@ -243,6 +247,16 @@ public class Personaje : MonoBehaviour
         bullet.GetComponent<Bullet>().setDirection(direction);
 
         Debug.Log("Bala disparada después de restablecer 'isShoot1'.");
+
+        ApplyRecoil(recoilForceShoot1);
+    }
+
+    private void ApplyRecoil(float recoilForce)
+    {
+        r.WakeUp(); // Asegúrate de que el Rigidbody2D esté activo
+        Vector2 recoilDirection = new Vector2(-transform.localScale.x * recoilForce, 0); // Retroceso horizontal basado en la escala del personaje
+        r.AddForce(recoilDirection, ForceMode2D.Impulse);
+        Debug.Log($"Aplicando retroceso: {recoilDirection.x}");
     }
 
     private IEnumerator Shoot2Timer()

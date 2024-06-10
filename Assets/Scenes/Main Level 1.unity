@@ -21503,11 +21503,13 @@ MonoBehaviour:
     m_Bits: 64
   sonidoSalto: {fileID: 8300000, guid: 2b2cc8abadd2e9842af08028a7ba51ad, type: 3}
   Bullet1Prefab: {fileID: 6084192985990922290, guid: 1d8820157a7ed1a47a377cb9e55c166a, type: 3}
-  fuerzaRetroceso: 1000
   jumpEffect: {fileID: 362216033}
   runEffect: {fileID: 1694620926}
   dropEffect1: {fileID: 1911364611}
   dropEffect2: {fileID: 2015515714}
+  recoilForceShoot1: 10
+  recoilForceShoot2: 2
+  recoilForceUltraShoot: 3
 --- !u!95 &2143817342
 Animator:
   serializedVersion: 5
