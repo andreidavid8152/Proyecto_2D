@@ -13,6 +13,8 @@ public class Personaje : MonoBehaviour
 
     public ParticleSystem jumpEffect;
     public ParticleSystem runEffect;
+    public ParticleSystem dropEffect1;
+    public ParticleSystem dropEffect2;
 
     private int shoot2Count = 0;
     private float shoot2TimeWindow = 3.0f;
@@ -107,14 +109,25 @@ public class Personaje : MonoBehaviour
     {
         float mov = Input.GetAxis("Horizontal");
 
-        if (mov != 0f)
+        if (mov != 0f && enSuelo)
         {
             animator.SetBool("isRunning", true);
             runEffect.Play();
+
+            // Detener los efectos de partículas cuando empieza a correr
+            if (dropEffect1 != null)
+            {
+                dropEffect1.Stop();
+            }
+            if (dropEffect2 != null)
+            {
+                dropEffect2.Stop();
+            }
         }
         else
         {
             animator.SetBool("isRunning", false);
+            runEffect.Stop();
         }
 
         r.velocity = new Vector2(mov * velocidad, r.velocity.y);
@@ -144,12 +157,33 @@ public class Personaje : MonoBehaviour
         if (sueloActual && !enSuelo)
         {
             saltosRestantes = saltosMaximos;
+
+            // Activa el efecto de partículas cuando aterriza
+            if (dropEffect1 != null && dropEffect2 != null)
+            {
+                dropEffect1.Play();
+                dropEffect2.Play();
+            }
         }
 
         enSuelo = sueloActual;
 
         if (Input.GetKeyDown(KeyCode.W) && saltosRestantes > 0)
         {
+            // Detener los efectos de partículas antes de saltar
+            if (dropEffect1 != null)
+            {
+                dropEffect1.Stop();
+            }
+            if (dropEffect2 != null)
+            {
+                dropEffect2.Stop();
+            }
+            if (runEffect != null)
+            {
+                runEffect.Stop();
+            }
+
             jumpEffect.Play();
             saltosRestantes--;
             r.velocity = new Vector2(r.velocity.x, 0f);
