@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Pixel Adventure 1/Scenes/Demo.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Main Menu.unity
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Level 1.unity
     guid: 69ae30d3728820443870a4fd88342e0a
+  - enabled: 1
+    path: Assets/Scenes/Main Level 2.unity
+    guid: 14aa6f6f232ebfd40952ecc0b61acc02
   m_configObjects: {}
