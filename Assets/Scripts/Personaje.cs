@@ -109,32 +109,40 @@ public class Personaje : MonoBehaviour
     void movimiento()
     {
         float mov = Input.GetAxis("Horizontal");
+        bool estaCorriendo = mov != 0f && enSuelo;
 
-        if (mov != 0f && enSuelo)
+        if (estaCorriendo)
         {
-            animator.SetBool("isRunning", true);
-            runEffect.Play();
+            if (!animator.GetBool("isRunning"))
+            {
+                Debug.Log("Iniciando correr y efectos de partículas.");
+                animator.SetBool("isRunning", true);
+                runEffect.Play();
 
-            // Detener los efectos de partículas cuando empieza a correr
-            if (dropEffect1 != null)
-            {
-                dropEffect1.Stop();
-            }
-            if (dropEffect2 != null)
-            {
-                dropEffect2.Stop();
+                if (dropEffect1 != null)
+                {
+                    dropEffect1.Stop();
+                }
+                if (dropEffect2 != null)
+                {
+                    dropEffect2.Stop();
+                }
             }
         }
         else
         {
-            animator.SetBool("isRunning", false);
-            runEffect.Stop();
+            if (animator.GetBool("isRunning"))
+            {
+                Debug.Log("Deteniendo correr y efectos de partículas.");
+                animator.SetBool("isRunning", false);
+                runEffect.Stop();
+            }
         }
 
         r.velocity = new Vector2(mov * velocidad, r.velocity.y);
-
         orientacion(mov);
     }
+
 
     void orientacion(float mov)
     {

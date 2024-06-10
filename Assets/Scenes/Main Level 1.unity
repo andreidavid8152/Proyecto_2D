@@ -2415,7 +2415,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21503,6 +21503,7 @@ MonoBehaviour:
     m_Bits: 64
   sonidoSalto: {fileID: 8300000, guid: 2b2cc8abadd2e9842af08028a7ba51ad, type: 3}
   Bullet1Prefab: {fileID: 6084192985990922290, guid: 1d8820157a7ed1a47a377cb9e55c166a, type: 3}
+  fuerzaRetroceso: 1000
   jumpEffect: {fileID: 362216033}
   runEffect: {fileID: 1694620926}
   dropEffect1: {fileID: 1911364611}
