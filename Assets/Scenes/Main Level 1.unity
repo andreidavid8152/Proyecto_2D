@@ -3754,6 +3754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hud: {fileID: 859852938}
+  saludEnemigo: {fileID: 1245564297}
 --- !u!4 &751130528
 Transform:
   m_ObjectHideFlags: 0
@@ -5019,6 +5020,7 @@ GameObject:
   - component: {fileID: 1245564296}
   - component: {fileID: 1245564295}
   - component: {fileID: 1245564294}
+  - component: {fileID: 1245564297}
   m_Layer: 0
   m_Name: barraSalud
   m_TagString: Untagged
@@ -5111,6 +5113,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1245564297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245564292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543f5cabf921b604c858b3a2ed84d213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidas:
+  - {fileID: 1456142383}
+  - {fileID: 872257016}
+  - {fileID: 981762331}
 --- !u!1 &1404651883
 GameObject:
   m_ObjectHideFlags: 0

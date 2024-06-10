@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public HUD hud;
+    public BarraSaludEnemigo saludEnemigo;
     public int PuntosTotales { get { return puntosTotales; } }
     private int puntosTotales;
     private int vidas = 3;
@@ -37,6 +38,12 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(2);
         }
         hud.DesactivarVida(vidas);
+    }
+
+    public void PerderVidaEnemigo(int damage)
+    {
+        vidas -= damage;
+        saludEnemigo.DesactivarVida(vidas);
     }
 
     public bool RecuperarVida()
