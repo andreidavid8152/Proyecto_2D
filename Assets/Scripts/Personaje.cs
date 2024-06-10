@@ -261,20 +261,47 @@ public class Personaje : MonoBehaviour
     }
 
     // Función Shoot2 que establece isShoot2 en true y luego en false después de 0.45 segundos
+    // Función Shoot2 que establece isShoot2 en true y luego en false después de 0.45 segundos
     public void Shoot2()
     {
         animator.SetBool("isShoot2", true);
         Debug.Log("Parámetro 'isShoot2' se establecerá en true en el Animator del jugador.");
-        StartCoroutine(ResetIsShoot2());
+        StartCoroutine(ResetIsShoot2AndShootBullets(recoilDistanceShoot2));
     }
 
-    private IEnumerator ResetIsShoot2()
+    private IEnumerator ResetIsShoot2AndShootBullets(float recoilDistance)
     {
         Debug.Log("Esperando para restablecer 'isShoot2'...");
         yield return new WaitForSeconds(0.45f);
         animator.SetBool("isShoot2", false);
         Debug.Log("Parámetro 'isShoot2' se ha restablecido a false en el Animator del jugador.");
+
+        Vector3 direction;
+        if (transform.localScale.x == 1.0f) direction = Vector2.right;
+        else direction = Vector2.left;
+
+        // Ajustar la posición inicial más alta para ambas balas
+        Vector3 bulletStartPosition = transform.position + direction;
+        bulletStartPosition.y += 0.5f; // Aumentar la altura inicial de las balas
+
+        // Posición de la primera bala
+        Vector3 bulletPosition1 = bulletStartPosition;
+        bulletPosition1.y -= 0.70f;
+        GameObject bullet1 = Instantiate(Bullet1Prefab, bulletPosition1, Quaternion.identity);
+        bullet1.tag = "PlayerBullet";
+        bullet1.GetComponent<Bullet>().setDirection(direction);
+
+        // Posición de la segunda bala (más junta)
+        Vector3 bulletPosition2 = bulletStartPosition;
+        bulletPosition2.y -= 0.40f; // Ajustar la altura de la segunda bala para que estén más juntas
+        GameObject bullet2 = Instantiate(Bullet1Prefab, bulletPosition2, Quaternion.identity);
+        bullet2.tag = "PlayerBullet";
+        bullet2.GetComponent<Bullet>().setDirection(direction);
+
+        // Aplica el recoil aquí después de disparar
+        ApplyRecoil(recoilDistance);
     }
+
 
     private IEnumerator UltraShootTimer()
     {
