@@ -11,6 +11,9 @@ public class Personaje : MonoBehaviour
     public LayerMask capaSuelo;
     public AudioClip sonidoSalto;
 
+    public ParticleSystem jumpEffect;
+    public ParticleSystem runEffect;
+
     private int shoot2Count = 0;
     private float shoot2TimeWindow = 3.0f;
     private float shoot2Timer = 0.0f;
@@ -107,6 +110,7 @@ public class Personaje : MonoBehaviour
         if (mov != 0f)
         {
             animator.SetBool("isRunning", true);
+            runEffect.Play();
         }
         else
         {
@@ -146,6 +150,7 @@ public class Personaje : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W) && saltosRestantes > 0)
         {
+            jumpEffect.Play();
             saltosRestantes--;
             r.velocity = new Vector2(r.velocity.x, 0f);
             r.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
