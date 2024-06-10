@@ -2860,6 +2860,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: jumpEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 2282438384830233661, guid: 7697a49ea05824642b45a2fab61c81c4, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5334,7 +5338,7 @@ GameObject:
   - component: {fileID: 1694620925}
   m_Layer: 0
   m_Name: runEffect
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10705,7 +10709,7 @@ GameObject:
   - component: {fileID: 1911364610}
   m_Layer: 0
   m_Name: dropEffect
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15613,7 +15617,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1947620124}
   m_CullTransparentMesh: 1
---- !u!1001 &1989982224
+--- !u!1001 &1982521772
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -15624,14 +15628,18 @@ PrefabInstance:
     - target: {fileID: 376393812035720765, guid: 0dc6417425cfb454cbca8fe9066abf78, type: 3}
       propertyPath: personaje
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2143817336}
+    - target: {fileID: 376393812035720765, guid: 0dc6417425cfb454cbca8fe9066abf78, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 6084192985990922290, guid: 1d8820157a7ed1a47a377cb9e55c166a, type: 3}
     - target: {fileID: 3775369012432890018, guid: 0dc6417425cfb454cbca8fe9066abf78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.24
+      value: -5.2563972
       objectReference: {fileID: 0}
     - target: {fileID: 3775369012432890018, guid: 0dc6417425cfb454cbca8fe9066abf78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.03
+      value: -0.005908847
       objectReference: {fileID: 0}
     - target: {fileID: 3775369012432890018, guid: 0dc6417425cfb454cbca8fe9066abf78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15667,7 +15675,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548644930518721203, guid: 0dc6417425cfb454cbca8fe9066abf78, type: 3}
       propertyPath: m_Name
-      value: Enemy (1)
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15781,7 +15789,7 @@ GameObject:
   - component: {fileID: 2015515713}
   m_Layer: 0
   m_Name: dropEffect (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21209,4 +21217,4 @@ SceneRoots:
   - {fileID: 1561884821}
   - {fileID: 343348367}
   - {fileID: 384775325}
-  - {fileID: 1989982224}
+  - {fileID: 1982521772}

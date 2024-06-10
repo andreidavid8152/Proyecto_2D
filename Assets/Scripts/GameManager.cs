@@ -29,15 +29,13 @@ public class GameManager : MonoBehaviour
         hud.ActualizarPuntos(PuntosTotales);
     }
 
-    public void PerderVida()
+    public void PerderVida(int damage)
     {
-        vidas -= 1;
-
-        if (vidas == 0)
+        vidas -= damage;
+        if (vidas <= 0)
         {
             SceneManager.LoadScene(2);
         }
-
         hud.DesactivarVida(vidas);
     }
 
