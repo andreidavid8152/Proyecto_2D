@@ -10,6 +10,7 @@ public class Personaje : MonoBehaviour
     public int saltosMaximos;
     public LayerMask capaSuelo;
     public AudioClip sonidoSalto;
+    public GameObject Bullet1Prefab;
 
     public ParticleSystem jumpEffect;
     public ParticleSystem runEffect;
@@ -210,9 +211,18 @@ public class Personaje : MonoBehaviour
     // Función Shoot1 que establece isShoot1 en true y luego en false después de 0.42 segundos
     public void Shoot1()
     {
+        Vector3 direction;
         animator.SetBool("isShoot1", true);
-        Debug.Log("Parámetro 'isShoot1' se establecerá en true en el Animator del jugador.");
         StartCoroutine(ResetIsShoot1());
+
+        if (transform.localScale.x == 1.0f) direction = Vector2.right;
+        else direction = Vector2.left;
+
+        GameObject bullet = Instantiate(Bullet1Prefab, transform.position + direction, Quaternion.identity);
+        bullet.GetComponent<Bullet>().setDirection(direction);
+
+        Debug.Log("Parámetro 'isShoot1' se establecerá en true en el Animator del jugador.");
+
     }
 
     private IEnumerator ResetIsShoot1()

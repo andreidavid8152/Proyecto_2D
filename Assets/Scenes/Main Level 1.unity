@@ -21102,6 +21102,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   sonidoSalto: {fileID: 8300000, guid: 2b2cc8abadd2e9842af08028a7ba51ad, type: 3}
+  Bullet1Prefab: {fileID: 6084192985990922290, guid: 1d8820157a7ed1a47a377cb9e55c166a, type: 3}
   jumpEffect: {fileID: 362216033}
   runEffect: {fileID: 1694620926}
   dropEffect1: {fileID: 1911364611}
