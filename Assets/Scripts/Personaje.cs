@@ -25,9 +25,9 @@ public class Personaje : MonoBehaviour
     private float ultraShootTimeWindow = 3.0f;
     private float ultraShootTimer = 0.0f;
 
-    public float recoilForceShoot1 = 10.0f;
-    public float recoilForceShoot2 = 2.0f;
-    public float recoilForceUltraShoot = 3.0f;
+    public float recoilDistanceShoot1 = 0.5f; // Distancia de retroceso para Shoot1
+    public float recoilDistanceShoot2 = 1.0f; // Distancia de retroceso para Shoot2
+    public float recoilDistanceUltraShoot = 1.5f; // Distancia de retroceso para UltraShoot
 
     private Rigidbody2D r;
     private BoxCollider2D b;
@@ -224,40 +224,35 @@ public class Personaje : MonoBehaviour
     public void Shoot1()
     {
         animator.SetBool("isShoot1", true);
-        StartCoroutine(ResetIsShoot1AndShootBullet());
+        StartCoroutine(ResetIsShoot1AndShootBullet(recoilDistanceShoot1));
     }
 
-    private IEnumerator ResetIsShoot1AndShootBullet()
+    private IEnumerator ResetIsShoot1AndShootBullet(float recoilDistance)
     {
-        Debug.Log("Esperando para restablecer 'isShoot1' y disparar bala...");
         yield return new WaitForSeconds(0.42f);
         animator.SetBool("isShoot1", false);
-        Debug.Log("Parámetro 'isShoot1' se ha restablecido a false en el Animator del jugador.");
 
         Vector3 direction;
         if (transform.localScale.x == 1.0f) direction = Vector2.right;
         else direction = Vector2.left;
 
-        // Ajuste en la posición de la bala para que salga más abajo
         Vector3 bulletPosition = transform.position + direction;
-        bulletPosition.y -= 0.70f; // Ajusta este valor según sea necesari
+        bulletPosition.y -= 0.70f;
 
         GameObject bullet = Instantiate(Bullet1Prefab, bulletPosition, Quaternion.identity);
-        bullet.tag = "PlayerBullet"; // Asigna el tag PlayerBullet a la bala
+        bullet.tag = "PlayerBullet";
         bullet.GetComponent<Bullet>().setDirection(direction);
 
-        Debug.Log("Bala disparada después de restablecer 'isShoot1'.");
-
-        ApplyRecoil(recoilForceShoot1);
+        // Aplica el recoil aquí después de disparar
+        ApplyRecoil(recoilDistance);
     }
 
-    private void ApplyRecoil(float recoilForce)
+    private void ApplyRecoil(float recoilDistance)
     {
-        r.WakeUp(); // Asegúrate de que el Rigidbody2D esté activo
-        Vector2 recoilDirection = new Vector2(-transform.localScale.x * recoilForce, 0); // Retroceso horizontal basado en la escala del personaje
-        r.AddForce(recoilDirection, ForceMode2D.Impulse);
-        Debug.Log($"Aplicando retroceso: {recoilDirection.x}");
+        Vector3 recoilDirection = new Vector3(-transform.localScale.x * recoilDistance, 0, 0);
+        transform.position += recoilDirection; // Aplica el recoil moviendo la posición del personaje
     }
+
 
     private IEnumerator Shoot2Timer()
     {
