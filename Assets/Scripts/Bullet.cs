@@ -24,12 +24,22 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Personaje personaje = other.GetComponent<Personaje>();
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player") && gameObject.CompareTag("EnemyBullet"))
         {
+            Personaje personaje = other.GetComponent<Personaje>();
             personaje.SetDamage();
             GameManager.Instance.PerderVida(damage); // Aplicar daño al jugador
             Destroy(gameObject); // Destruir la bala al impactar
+        }
+        else if (other.CompareTag("EnemyBullet") && gameObject.CompareTag("PlayerBullet"))
+        {
+            Destroy(other.gameObject); // Destruir la otra bala
+            Destroy(gameObject); // Destruir esta bala
+        }
+        else if (other.CompareTag("PlayerBullet") && gameObject.CompareTag("EnemyBullet"))
+        {
+            Destroy(other.gameObject); // Destruir la otra bala
+            Destroy(gameObject); // Destruir esta bala
         }
     }
 

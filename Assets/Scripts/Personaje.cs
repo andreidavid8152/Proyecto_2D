@@ -231,6 +231,7 @@ public class Personaje : MonoBehaviour
         bulletPosition.y -= 0.70f; // Ajusta este valor según sea necesari
 
         GameObject bullet = Instantiate(Bullet1Prefab, bulletPosition, Quaternion.identity);
+        bullet.tag = "PlayerBullet"; // Asigna el tag PlayerBullet a la bala
         bullet.GetComponent<Bullet>().setDirection(direction);
 
         Debug.Log("Bala disparada después de restablecer 'isShoot1'.");

@@ -50,6 +50,7 @@ public class Enemigo : MonoBehaviour
         direction.Normalize();
 
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        bullet.tag = "EnemyBullet"; // Asigna el tag EnemyBullet a la bala
         bullet.GetComponent<Bullet>().setDirection(direction);
 
         Debug.Log("Enemigo disparó una bala.");
