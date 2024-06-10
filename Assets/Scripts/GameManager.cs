@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public int PuntosTotales { get { return puntosTotales; } }
     private int puntosTotales;
     private int vidas = 3;
+    private int vidasEnemigo = 3;
 
     private void Awake()
     {
@@ -42,8 +43,8 @@ public class GameManager : MonoBehaviour
 
     public void PerderVidaEnemigo(int damage)
     {
-        vidas -= damage;
-        saludEnemigo.DesactivarVida(vidas);
+        vidasEnemigo -= damage;
+        saludEnemigo.DesactivarVida(vidasEnemigo);
     }
 
     public bool RecuperarVida()

@@ -47,7 +47,6 @@ public class Bullet : MonoBehaviour
             Enemigo enemigo = other.GetComponent<Enemigo>();
             if (enemigo != null)
             {
-                Debug.Log("dsaf");
                 GameManager.Instance.PerderVidaEnemigo(damage); // Aplicar daño al jugador
                 enemigo.RecibirDanio(damage); // Aplicar daño al enemigo
                 Destroy(gameObject); // Destruir la bala al impactar
