@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemigo : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class Enemigo : MonoBehaviour
     public GameObject bulletPrefab; // Prefab de la bala del enemigo
     public float shootingRange = 5.0f; // Distancia a la que el enemigo dispara
     public float cooldown = 3.0f; // Tiempo de cooldown entre disparos
+    public int maxVidas = 3; // Máximo de vidas del enemigo
 
+    private int vidas;
     private float lastShotTime; // Tiempo del último disparo
     private Vector3 originalScale;
 
@@ -17,6 +20,7 @@ public class Enemigo : MonoBehaviour
         // Guarda la escala original del enemigo al iniciar el juego
         originalScale = transform.localScale;
         lastShotTime = -cooldown; // Asegura que el enemigo pueda disparar inmediatamente al iniciar
+        vidas = maxVidas;
     }
 
     private void Update()
@@ -55,4 +59,14 @@ public class Enemigo : MonoBehaviour
 
         Debug.Log("Enemigo disparó una bala.");
     }
+
+    public void RecibirDanio(int damage)
+    {
+        vidas -= damage;
+        if (vidas <= 0)
+        {
+            Destroy(gameObject); // Destruir al enemigo
+        }
+    }
+
 }

@@ -41,6 +41,15 @@ public class Bullet : MonoBehaviour
             Destroy(other.gameObject); // Destruir la otra bala
             Destroy(gameObject); // Destruir esta bala
         }
+        else if (other.CompareTag("Enemy") && gameObject.CompareTag("PlayerBullet"))
+        {
+            Enemigo enemigo = other.GetComponent<Enemigo>();
+            if (enemigo != null)
+            {
+                enemigo.RecibirDanio(damage); // Aplicar daño al enemigo
+                Destroy(gameObject); // Destruir la bala al impactar
+            }
+        }
     }
 
     public void DestroyBullet()
