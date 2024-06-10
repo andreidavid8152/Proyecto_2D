@@ -21507,9 +21507,9 @@ MonoBehaviour:
   runEffect: {fileID: 1694620926}
   dropEffect1: {fileID: 1911364611}
   dropEffect2: {fileID: 2015515714}
-  recoilForceShoot1: 10
-  recoilForceShoot2: 2
-  recoilForceUltraShoot: 3
+  recoilDistanceShoot1: 0.5
+  recoilDistanceShoot2: 1
+  recoilDistanceUltraShoot: 1.5
 --- !u!95 &2143817342
 Animator:
   serializedVersion: 5
