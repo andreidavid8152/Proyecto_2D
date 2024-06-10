@@ -11,6 +11,7 @@ public class Personaje : MonoBehaviour
     public LayerMask capaSuelo;
     public AudioClip sonidoSalto;
     public GameObject Bullet1Prefab;
+    public GameObject UltraShootPrefab;
 
     public ParticleSystem jumpEffect;
     public ParticleSystem runEffect;
@@ -314,16 +315,33 @@ public class Personaje : MonoBehaviour
     {
         animator.SetBool("isUltraShoot", true);
         Debug.Log("Parámetro 'isUltraShoot' se establecerá en true en el Animator del jugador.");
-        StartCoroutine(ResetIsUltraShoot());
+        StartCoroutine(ResetIsUltraShootAndShootBullets(recoilDistanceUltraShoot));
     }
 
-    private IEnumerator ResetIsUltraShoot()
+    private IEnumerator ResetIsUltraShootAndShootBullets(float recoilDistance)
     {
         Debug.Log("Esperando para restablecer 'isUltraShoot'...");
-        yield return new WaitForSeconds(1.05f);
+        yield return new WaitForSeconds(1.05f); // Duración del efecto de UltraShoot
         animator.SetBool("isUltraShoot", false);
         Debug.Log("Parámetro 'isUltraShoot' se ha restablecido a false en el Animator del jugador.");
+
+        Vector3 direction;
+        if (transform.localScale.x == 1.0f) direction = Vector2.right;
+        else direction = Vector2.left;
+
+        // Ajustar la posición inicial para la bala de ultra disparo
+        Vector3 bulletPosition = transform.position + direction;
+        bulletPosition.y -= 0.70f; // Ajustar según sea necesario
+
+        // Instanciar el objeto UltraShoot
+        GameObject bullet = Instantiate(UltraShootPrefab, bulletPosition, Quaternion.identity); // Asegúrate de tener un prefab para UltraShoot
+        bullet.tag = "PlayerBullet";
+        bullet.GetComponent<ultrashoot>().setDirection(direction);
+
+        // Aplica el recoil aquí después de disparar
+        ApplyRecoil(recoilDistance);
     }
+
 
     public void SetSuccess()
     {
