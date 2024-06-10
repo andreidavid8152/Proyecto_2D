@@ -7,11 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public HUD hud;
-    public BarraSaludEnemigo saludEnemigo;
+    public List<BarraSaludEnemigo> saludEnemigos = new List<BarraSaludEnemigo>();
     public int PuntosTotales { get { return puntosTotales; } }
     private int puntosTotales;
     private int vidas = 3;
-    private int vidasEnemigo = 3;
 
     private void Awake()
     {
@@ -41,10 +40,19 @@ public class GameManager : MonoBehaviour
         hud.DesactivarVida(vidas);
     }
 
-    public void PerderVidaEnemigo(int damage)
+    public void RegistrarEnemigo(BarraSaludEnemigo saludEnemigo)
     {
-        vidasEnemigo -= damage;
-        saludEnemigo.DesactivarVida(vidasEnemigo);
+        saludEnemigos.Add(saludEnemigo);
+    }
+
+    public void EliminarEnemigo(BarraSaludEnemigo saludEnemigo)
+    {
+        saludEnemigos.Remove(saludEnemigo);
+    }
+
+    public void PerderVidaEnemigo(BarraSaludEnemigo saludEnemigo, int damage)
+    {
+        saludEnemigo.DesactivarVida(damage);
     }
 
     public bool RecuperarVida()
@@ -53,7 +61,6 @@ public class GameManager : MonoBehaviour
         {
             return false;
         }
-
         hud.ActivarVida(vidas);
         vidas += 1;
         return true;

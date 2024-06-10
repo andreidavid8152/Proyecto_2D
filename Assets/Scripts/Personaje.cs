@@ -331,7 +331,7 @@ public class Personaje : MonoBehaviour
 
         // Ajustar la posición inicial para la bala de ultra disparo
         Vector3 bulletPosition = transform.position + direction;
-        bulletPosition.y -= 0.70f; // Ajustar según sea necesario
+        bulletPosition.y -= 0.30f; // Ajustar según sea necesario
 
         // Instanciar el objeto UltraShoot
         GameObject bullet = Instantiate(UltraShootPrefab, bulletPosition, Quaternion.identity); // Asegúrate de tener un prefab para UltraShoot

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ultrashoot : MonoBehaviour
@@ -28,11 +26,9 @@ public class ultrashoot : MonoBehaviour
     {
         if (other.CompareTag("Enemy") && gameObject.CompareTag("PlayerBullet"))
         {
-
             Enemigo enemigo = other.GetComponent<Enemigo>();
             if (enemigo != null)
             {
-                GameManager.Instance.PerderVidaEnemigo(damage); // Aplicar daño al jugador
                 enemigo.RecibirDanio(damage); // Aplicar daño al enemigo
                 Destroy(gameObject); // Destruir la bala al impactar
             }

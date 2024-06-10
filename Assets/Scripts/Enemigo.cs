@@ -6,21 +6,21 @@ using UnityEngine.UI;
 public class Enemigo : MonoBehaviour
 {
     public GameObject personaje;
-    public GameObject bulletPrefab; // Prefab de la bala del enemigo
-    public float shootingRange = 5.0f; // Distancia a la que el enemigo dispara
-    public float cooldown = 3.0f; // Tiempo de cooldown entre disparos
-    public int maxVidas = 3; // Máximo de vidas del enemigo
-
+    public GameObject bulletPrefab;
+    public float shootingRange = 5.0f;
+    public float cooldown = 3.0f;
+    public int maxVidas = 3;
     private int vidas;
-    private float lastShotTime; // Tiempo del último disparo
+    private float lastShotTime;
     private Vector3 originalScale;
+    public BarraSaludEnemigo barraSalud; // Asigna la barra de salud en el inspector
 
     private void Start()
     {
-        // Guarda la escala original del enemigo al iniciar el juego
         originalScale = transform.localScale;
-        lastShotTime = -cooldown; // Asegura que el enemigo pueda disparar inmediatamente al iniciar
+        lastShotTime = -cooldown;
         vidas = maxVidas;
+        GameManager.Instance.RegistrarEnemigo(barraSalud); // Registra el enemigo en el GameManager
     }
 
     private void Update()
@@ -28,16 +28,13 @@ public class Enemigo : MonoBehaviour
         Vector3 direction = personaje.transform.position - transform.position;
         if (direction.x >= 0.0f)
         {
-            // Usa la escala original pero asegúrate de que esté mirando hacia la derecha
             transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
         }
         else
         {
-            // Usa la escala original pero asegúrate de que esté mirando hacia la izquierda
             transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
         }
 
-        // Verifica la distancia al personaje y dispara si está dentro del rango
         if (Vector3.Distance(personaje.transform.position, transform.position) <= shootingRange)
         {
             if (Time.time >= lastShotTime + cooldown)
@@ -52,21 +49,26 @@ public class Enemigo : MonoBehaviour
     {
         Vector3 direction = personaje.transform.position - transform.position;
         direction.Normalize();
-
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        bullet.tag = "EnemyBullet"; // Asigna el tag EnemyBullet a la bala
+        bullet.tag = "EnemyBullet";
         bullet.GetComponent<Bullet>().setDirection(direction);
-
         Debug.Log("Enemigo disparó una bala.");
     }
 
     public void RecibirDanio(int damage)
     {
         vidas -= damage;
+        GameManager.Instance.PerderVidaEnemigo(barraSalud, damage);
         if (vidas <= 0)
         {
-            Destroy(gameObject); // Destruir al enemigo
+            GameManager.Instance.EliminarEnemigo(barraSalud);
+            Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.EliminarEnemigo(barraSalud); // Elimina el enemigo del GameManager al ser destruido
     }
 
 }

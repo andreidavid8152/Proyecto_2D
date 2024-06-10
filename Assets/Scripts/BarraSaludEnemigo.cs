@@ -6,8 +6,14 @@ public class BarraSaludEnemigo : MonoBehaviour
 {
     public GameObject[] vidas;
 
-    public void DesactivarVida(int indice)
+    public void DesactivarVida(int damage)
     {
-        vidas[indice].SetActive(false);
+        for (int i = 0; i < damage && i < vidas.Length; i++)
+        {
+            if (vidas[i].activeSelf)
+            {
+                vidas[i].SetActive(false);
+            }
+        }
     }
 }
