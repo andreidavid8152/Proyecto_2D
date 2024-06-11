@@ -25,6 +25,11 @@ public class Personaje : MonoBehaviour
     private float shoot2TimeWindow = 3.0f;
     private float shoot2Timer = 0.0f;
 
+    private bool doubleShootEnabled = false;
+    private int doubleShootCount = 0;
+    private float doubleShootTimeWindow = 3.0f;
+    private float doubleShootTimer = 0.0f;
+
     private int ultraShootCount = 0;
     private float ultraShootTimeWindow = 3.0f;
     private float ultraShootTimer = 0.0f;
@@ -125,6 +130,51 @@ public class Personaje : MonoBehaviour
             SwitchGravity();
         }
 
+        if (doubleShootEnabled && Input.GetKeyDown(KeyCode.M))
+        {
+            doubleShootCount++;
+            Debug.Log("DoubleShoot count: " + doubleShootCount);
+            if (doubleShootCount == 1)
+            {
+                doubleShootTimer = doubleShootTimeWindow;
+            }
+            else if (doubleShootCount == 2)
+            {
+                ActivateDoubleShoot();
+                doubleShootCount = 0; // Reiniciar el contador
+                doubleShootTimer = 0; // Reiniciar el temporizador
+            }
+        }
+
+        // Decrementar el temporizador para DoubleShoot y resetear el contador si se acaba el tiempo
+        if (doubleShootTimer > 0)
+        {
+            doubleShootTimer -= Time.deltaTime;
+            if (doubleShootTimer <= 0)
+            {
+                doubleShootCount = 0; // Reiniciar el contador si el tiempo se agota
+                Debug.Log("DoubleShoot temporizador agotado, contador reiniciado.");
+            }
+        }
+
+    }
+
+    public void EnableDoubleShoot()
+    {
+        doubleShootEnabled = true;
+    }
+
+    public void ActivateDoubleShoot()
+    {
+        StartCoroutine(DoubleShootCoroutine());
+    }
+
+    private IEnumerator DoubleShootCoroutine()
+    {
+        // Ejecutar Shoot1 y Shoot2 una sola vez
+        Shoot1();
+        Shoot2();
+        yield return null; // Se detiene inmediatamente después de ejecutar los disparos
     }
 
     public void EnableGravitySwitch()
@@ -264,6 +314,8 @@ public class Personaje : MonoBehaviour
 
         Vector3 bulletPosition = transform.position + direction;
         bulletPosition.y -= 0.70f;
+
+        bulletPosition.x -= 0.54f;
 
         GameObject bullet = Instantiate(Bullet1Prefab, bulletPosition, Quaternion.identity);
         bullet.tag = "PlayerBullet";
