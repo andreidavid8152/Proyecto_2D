@@ -15,6 +15,8 @@ public class Enemigo : MonoBehaviour
     private Vector3 originalScale;
     public BarraSaludEnemigo barraSalud; // Asigna la barra de salud en el inspector
     public AudioClip sonidoRecibirDanio;
+    public AudioClip explosionSonido;
+    public GameObject efectoExplosion;
 
     private bool gravityInverted = false;
 
@@ -82,6 +84,7 @@ public class Enemigo : MonoBehaviour
         GameManager.Instance.PerderVidaEnemigo(barraSalud, vidas);
         if (vidas <= 0)
         {
+            explosion();
             GameManager.Instance.EliminarEnemigo(barraSalud);
             Destroy(gameObject);
         }
@@ -90,6 +93,12 @@ public class Enemigo : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.EliminarEnemigo(barraSalud); // Elimina el enemigo del GameManager al ser destruido
+    }
+
+    public void explosion()
+    {
+        AudioManager.Instance.ReproducirSonido(explosionSonido);
+        Instantiate(efectoExplosion, transform.position, Quaternion.identity);
     }
 
 }
