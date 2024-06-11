@@ -14,6 +14,7 @@ public class Enemigo : MonoBehaviour
     private float lastShotTime;
     private Vector3 originalScale;
     public BarraSaludEnemigo barraSalud; // Asigna la barra de salud en el inspector
+    public AudioClip sonidoRecibirDanio;
 
     private bool gravityInverted = false;
 
@@ -71,6 +72,7 @@ public class Enemigo : MonoBehaviour
 
     public void RecibirDanio(int damage)
     {
+        AudioManager.Instance.ReproducirSonido(sonidoRecibirDanio);
         vidas -= damage;
         Debug.Log(vidas);
         if (vidas < 0)

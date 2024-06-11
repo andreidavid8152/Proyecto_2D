@@ -12,6 +12,7 @@ public class Personaje : MonoBehaviour
     public AudioClip sonidoSalto;
     public GameObject Bullet1Prefab;
     public GameObject UltraShootPrefab;
+    public AudioClip sonidoRecibirDanio;
 
     private bool canSwitchGravity = false;
     private bool gravityInverted = false;
@@ -291,6 +292,7 @@ public class Personaje : MonoBehaviour
 
     public void SetDamage()
     {
+        AudioManager.Instance.ReproducirSonido(sonidoRecibirDanio);
         animator.SetBool("isDamage", true);
         Debug.Log("Parámetro 'isDamage' se establecerá en true en el Animator del jugador.");
         StartCoroutine(ResetIsDamage());

@@ -340,6 +340,7 @@ MonoBehaviour:
   cooldown: 3
   maxVidas: 3
   barraSalud: {fileID: 6172261612138833410, guid: 828065ae71bb8f342b88c0c7bd9afd4d, type: 3}
+  sonidoRecibirDanio: {fileID: 8300000, guid: 633914fa60b20984ab6166cb8f12d564, type: 3}
 --- !u!50 &2763609424383746157
 Rigidbody2D:
   serializedVersion: 4
