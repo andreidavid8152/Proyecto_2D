@@ -4525,6 +4525,7 @@ GameObject:
   - component: {fileID: 1033449145}
   - component: {fileID: 1033449144}
   - component: {fileID: 1033449143}
+  - component: {fileID: 1033449146}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -4563,7 +4564,7 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 1.6
+  m_XDamping: 0.4
   m_YDamping: 1.6
   m_ZDamping: 1
   m_TargetMovementOnly: 1
@@ -4629,6 +4630,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1033449146
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033449141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1158540010
 GameObject:
   m_ObjectHideFlags: 0
@@ -5116,6 +5134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1596163229}
   - component: {fileID: 1596163228}
+  - component: {fileID: 1596163230}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -5178,6 +5197,18 @@ Transform:
   - {fileID: 1033449142}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596163230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596163227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5484fdf7ceb67eb4ca2f25e7bd5ebcf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1654261568
 PrefabInstance:
   m_ObjectHideFlags: 0
