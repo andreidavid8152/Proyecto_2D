@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   damage: 3
+  sonidoUltraShoot: {fileID: 8300000, guid: f2b9ecf6156553d44a0b5ccd6a3da39f, type: 3}
 --- !u!50 &8174628892864487923
 Rigidbody2D:
   serializedVersion: 4

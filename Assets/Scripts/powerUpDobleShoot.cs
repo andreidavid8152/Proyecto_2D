@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class powerUpDobleShoot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public AudioClip sonidoPowerUp;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.Instance.ReproducirSonido(sonidoPowerUp);
             Personaje personaje = collision.GetComponent<Personaje>();
             if (personaje != null)
             {

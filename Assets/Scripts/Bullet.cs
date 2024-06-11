@@ -6,10 +6,12 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D Rigidbody2D;
     private Vector2 Direction;
     public int damage = 1; // Cantidad de daño que la bala inflige
+    public AudioClip sonidoDisparo;
 
     void Start()
     {
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        AudioManager.Instance.ReproducirSonido(sonidoDisparo);
     }
 
     void Update()

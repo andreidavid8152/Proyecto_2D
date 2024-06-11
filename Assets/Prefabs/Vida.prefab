@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51429db836e750548a16c7ce732757f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sonidoRecogerVida: {fileID: 8300000, guid: 7db4336f2f6606e408e37763d5f9e1bc, type: 3}
 --- !u!61 &3907115641532039210
 BoxCollider2D:
   m_ObjectHideFlags: 0
