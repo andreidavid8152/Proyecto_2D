@@ -4648,6 +4648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hud: {fileID: 859852938}
   saludEnemigos: []
+  sonidoPerder: {fileID: 8300000, guid: 01cb59bbeb78a044ba618ed1523e8554, type: 3}
 --- !u!4 &751130528
 Transform:
   m_ObjectHideFlags: 0
@@ -22251,6 +22252,7 @@ MonoBehaviour:
   Bullet1Prefab: {fileID: 6084192985990922290, guid: 1d8820157a7ed1a47a377cb9e55c166a, type: 3}
   UltraShootPrefab: {fileID: 8098661509718357635, guid: 71417955ee99f944b8dfa0419e7cdd95, type: 3}
   sonidoRecibirDanio: {fileID: 8300000, guid: 4c36a043621fffe4b9ad6a85d5641ab3, type: 3}
+  isDead: 0
   jumpEffect: {fileID: 362216033}
   runEffect: {fileID: 1694620926}
   dropEffect1: {fileID: 1911364611}

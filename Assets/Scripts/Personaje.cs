@@ -13,6 +13,8 @@ public class Personaje : MonoBehaviour
     public GameObject Bullet1Prefab;
     public GameObject UltraShootPrefab;
     public AudioClip sonidoRecibirDanio;
+    public bool isDead = false; // Agregar esta línea para la variable isDead
+
 
     private bool canSwitchGravity = false;
     private bool gravityInverted = false;
@@ -59,8 +61,12 @@ public class Personaje : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movimiento();
-        salto();
+        if (!isDead)
+        {
+            movimiento();
+            salto();
+            // El resto de las acciones en Update...
+        }
 
         // Llamar a Shoot1 cuando se presione el clic izquierdo del ratón
         if (Input.GetMouseButtonDown(0)) // 0 es el botón izquierdo del ratón
@@ -427,6 +433,23 @@ public class Personaje : MonoBehaviour
         Debug.Log("Esperando para restablecer 'isSuccess'...");
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene(1);
+    }
+
+    public void Die() // Nuevo método para manejar la muerte del personaje
+    {
+        if (!isDead)
+        {
+            isDead = true;
+            animator.SetBool("isDead", true);
+            StartCoroutine(DieCoroutine());
+        }
+    }
+
+
+    private IEnumerator DieCoroutine()
+    {
+        yield return new WaitForSeconds(1.5f); // Espera 2 segundos para que se vea la animación de morir
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
     }
 
 }

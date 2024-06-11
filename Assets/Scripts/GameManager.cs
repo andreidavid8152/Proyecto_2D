@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public HUD hud;
     public List<BarraSaludEnemigo> saludEnemigos = new List<BarraSaludEnemigo>();
+    public AudioClip sonidoPerder; // Agregar esta línea para el sonido de perder
+
     public int PuntosTotales { get { return puntosTotales; } }
     private int puntosTotales;
     private int vidas = 3;
@@ -35,10 +37,18 @@ public class GameManager : MonoBehaviour
         vidas -= damage;
         if (vidas <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // Reproducir el sonido de perder
+            AudioManager.Instance.ReproducirSonido(sonidoPerder);
+            // Llamar al método Die en el personaje en lugar de reiniciar inmediatamente
+            Personaje personaje = FindObjectOfType<Personaje>();
+            if (personaje != null)
+            {
+                personaje.Die();
+            }
         }
         hud.DesactivarVida(vidas);
     }
+
 
     public void RegistrarEnemigo(BarraSaludEnemigo saludEnemigo)
     {
