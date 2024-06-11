@@ -177,6 +177,14 @@ public class Personaje : MonoBehaviour
         yield return null; // Se detiene inmediatamente después de ejecutar los disparos
     }
 
+    public void ChangeSize(bool isBig)
+    {
+        float scaleFactor = isBig ? 1.0f : 0.5f; // Factor de escala para tamaño grande o pequeño
+                                                 // Ajustar la escala del personaje
+        Vector3 newScale = new Vector3(-scaleFactor, -scaleFactor, transform.localScale.z);
+        transform.localScale = newScale;
+    }
+
     public void EnableGravitySwitch()
     {
         canSwitchGravity = true;
@@ -309,7 +317,7 @@ public class Personaje : MonoBehaviour
         animator.SetBool("isShoot1", false);
 
         Vector3 direction;
-        if (transform.localScale.x == 1.0f) direction = Vector2.right;
+        if (transform.localScale.x >= 0.5f) direction = Vector2.right;
         else direction = Vector2.left;
 
         Vector3 bulletPosition = transform.position + direction;
@@ -347,7 +355,7 @@ public class Personaje : MonoBehaviour
         Debug.Log("Parámetro 'isShoot2' se ha restablecido a false en el Animator del jugador.");
 
         Vector3 direction;
-        if (transform.localScale.x == 1.0f) direction = Vector2.right;
+        if (transform.localScale.x >= 0.5f) direction = Vector2.right;
         else direction = Vector2.left;
 
         // Ajustar la posición inicial más alta para ambas balas
@@ -388,7 +396,7 @@ public class Personaje : MonoBehaviour
         Debug.Log("Parámetro 'isUltraShoot' se ha restablecido a false en el Animator del jugador.");
 
         Vector3 direction;
-        if (transform.localScale.x == 1.0f) direction = Vector2.right;
+        if (transform.localScale.x >= 0.5f) direction = Vector2.right;
         else direction = Vector2.left;
 
         // Ajustar la posición inicial para la bala de ultra disparo
