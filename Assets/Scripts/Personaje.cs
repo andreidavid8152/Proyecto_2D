@@ -13,6 +13,9 @@ public class Personaje : MonoBehaviour
     public GameObject Bullet1Prefab;
     public GameObject UltraShootPrefab;
 
+    private bool canSwitchGravity = false;
+    private bool gravityInverted = false;
+
     public ParticleSystem jumpEffect;
     public ParticleSystem runEffect;
     public ParticleSystem dropEffect1;
@@ -44,6 +47,7 @@ public class Personaje : MonoBehaviour
         b = GetComponent<BoxCollider2D>();
         saltosRestantes = saltosMaximos;
         animator = GetComponent<Animator>();
+        Physics2D.gravity = new Vector2(0, -9.8f); // Gravedad normal al inicio
     }
 
     // Update is called once per frame
@@ -115,6 +119,28 @@ public class Personaje : MonoBehaviour
             }
         }
 
+        // Cambiar la gravedad al presionar una tecla, por ejemplo, la tecla G
+        if (canSwitchGravity && Input.GetKeyDown(KeyCode.G))
+        {
+            SwitchGravity();
+        }
+
+    }
+
+    public void EnableGravitySwitch()
+    {
+        canSwitchGravity = true;
+    }
+
+    private void SwitchGravity()
+    {
+        gravityInverted = !gravityInverted;
+        Physics2D.gravity = gravityInverted ? new Vector2(0, 9.8f) : new Vector2(0, -9.8f);
+
+        // Opcional: Voltear el personaje si es necesario
+        Vector3 theScale = transform.localScale;
+        theScale.y *= -1;
+        transform.localScale = theScale;
     }
 
     void movimiento()
@@ -173,41 +199,25 @@ public class Personaje : MonoBehaviour
     void salto()
     {
         bool sueloActual = estaEnSuelo();
-
         if (sueloActual && !enSuelo)
         {
             saltosRestantes = saltosMaximos;
-
-            // Activa el efecto de partículas cuando aterriza
             if (dropEffect1 != null && dropEffect2 != null)
             {
                 dropEffect1.Play();
                 dropEffect2.Play();
             }
         }
-
         enSuelo = sueloActual;
-
         if (Input.GetKeyDown(KeyCode.W) && saltosRestantes > 0)
         {
-            // Detener los efectos de partículas antes de saltar
-            if (dropEffect1 != null)
-            {
-                dropEffect1.Stop();
-            }
-            if (dropEffect2 != null)
-            {
-                dropEffect2.Stop();
-            }
-            if (runEffect != null)
-            {
-                runEffect.Stop();
-            }
-
+            if (dropEffect1 != null) dropEffect1.Stop();
+            if (dropEffect2 != null) dropEffect2.Stop();
+            if (runEffect != null) runEffect.Stop();
             jumpEffect.Play();
             saltosRestantes--;
             r.velocity = new Vector2(r.velocity.x, 0f);
-            r.AddForce(Vector2.up * fuerzaSalto, ForceMode2D.Impulse);
+            r.AddForce((gravityInverted ? Vector2.down : Vector2.up) * fuerzaSalto, ForceMode2D.Impulse); // Invertir dirección del salto si la gravedad está invertida
             AudioManager.Instance.ReproducirSonido(sonidoSalto);
         }
     }
