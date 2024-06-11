@@ -35,7 +35,7 @@ public class ultrashoot : MonoBehaviour
         }
     }
 
-    public void DestroyBullet()
+    public void DestroyUltra()
     {
         Destroy(gameObject);
     }

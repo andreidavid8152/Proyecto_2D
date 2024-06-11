@@ -62,53 +62,59 @@ public class Personaje : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             shoot2Count++;
+            Debug.Log("Shoot2 count: " + shoot2Count);
             if (shoot2Count == 1)
             {
                 shoot2Timer = shoot2TimeWindow;
-                StartCoroutine(Shoot2Timer());
             }
             else if (shoot2Count == 3)
             {
                 Shoot2();
                 shoot2Count = 0; // Reiniciar el contador
+                shoot2Timer = 0; // Reiniciar el temporizador
             }
         }
 
-        // Decrementar el temporizador para Shoot2
+        // Decrementar el temporizador para Shoot2 y resetear el contador si se acaba el tiempo
         if (shoot2Timer > 0)
         {
             shoot2Timer -= Time.deltaTime;
             if (shoot2Timer <= 0)
             {
                 shoot2Count = 0; // Reiniciar el contador si el tiempo se agota
+                Debug.Log("Shoot2 temporizador agotado, contador reiniciado.");
             }
         }
 
         // Lógica para accionar UltraShoot cuando se presione 4 veces el clic derecho del ratón en un tiempo de 3s
+        // Dentro de Update, modifica la sección de UltraShoot
         if (Input.GetMouseButtonDown(1)) // 1 es el botón derecho del ratón
         {
             ultraShootCount++;
+            Debug.Log("UltraShoot count: " + ultraShootCount);
             if (ultraShootCount == 1)
             {
                 ultraShootTimer = ultraShootTimeWindow;
-                StartCoroutine(UltraShootTimer());
             }
             else if (ultraShootCount == 4)
             {
                 UltraShoot();
                 ultraShootCount = 0; // Reiniciar el contador
+                ultraShootTimer = 0; // Reiniciar el temporizador
             }
         }
 
-        // Decrementar el temporizador para UltraShoot
+        // Decrementar el temporizador para UltraShoot y resetear el contador si se acaba el tiempo
         if (ultraShootTimer > 0)
         {
             ultraShootTimer -= Time.deltaTime;
             if (ultraShootTimer <= 0)
             {
                 ultraShootCount = 0; // Reiniciar el contador si el tiempo se agota
+                Debug.Log("UltraShoot temporizador agotado, contador reiniciado.");
             }
         }
+
     }
 
     void movimiento()
@@ -254,14 +260,6 @@ public class Personaje : MonoBehaviour
         transform.position += recoilDirection; // Aplica el recoil moviendo la posición del personaje
     }
 
-
-    private IEnumerator Shoot2Timer()
-    {
-        yield return new WaitForSeconds(shoot2TimeWindow);
-        shoot2Count = 0;
-    }
-
-    // Función Shoot2 que establece isShoot2 en true y luego en false después de 0.45 segundos
     // Función Shoot2 que establece isShoot2 en true y luego en false después de 0.45 segundos
     public void Shoot2()
     {
@@ -301,13 +299,6 @@ public class Personaje : MonoBehaviour
 
         // Aplica el recoil aquí después de disparar
         ApplyRecoil(recoilDistance);
-    }
-
-
-    private IEnumerator UltraShootTimer()
-    {
-        yield return new WaitForSeconds(ultraShootTimeWindow);
-        ultraShootCount = 0;
     }
 
     // Función UltraShoot que establece isUltraShoot en true y luego en false después de 1.05 segundos

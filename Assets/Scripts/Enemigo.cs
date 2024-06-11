@@ -59,6 +59,10 @@ public class Enemigo : MonoBehaviour
     {
         vidas -= damage;
         Debug.Log(vidas);
+        if (vidas < 0)
+        {
+            vidas = 0; ;
+        }
         GameManager.Instance.PerderVidaEnemigo(barraSalud, vidas);
         if (vidas <= 0)
         {
