@@ -15,12 +15,26 @@ public class Enemigo : MonoBehaviour
     private Vector3 originalScale;
     public BarraSaludEnemigo barraSalud; // Asigna la barra de salud en el inspector
 
+    private bool gravityInverted = false;
+
     private void Start()
     {
         originalScale = transform.localScale;
         lastShotTime = -cooldown;
         vidas = maxVidas;
         GameManager.Instance.RegistrarEnemigo(barraSalud); // Registra el enemigo en el GameManager
+    }
+
+    public void SwitchGravity()
+    {
+        gravityInverted = !gravityInverted;
+
+        // Invertir la orientación del sprite del enemigo
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipY = !spriteRenderer.flipY;
+        }
     }
 
     private void Update()

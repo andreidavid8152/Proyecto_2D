@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         vidas -= damage;
         if (vidas <= 0)
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         hud.DesactivarVida(vidas);
     }

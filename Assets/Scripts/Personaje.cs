@@ -137,11 +137,20 @@ public class Personaje : MonoBehaviour
         gravityInverted = !gravityInverted;
         Physics2D.gravity = gravityInverted ? new Vector2(0, 9.8f) : new Vector2(0, -9.8f);
 
-        // Opcional: Voltear el personaje si es necesario
+        // Invertir la orientación del personaje
         Vector3 theScale = transform.localScale;
         theScale.y *= -1;
         transform.localScale = theScale;
+
+        // Encontrar todos los enemigos y cambiar su gravedad
+        Enemigo[] enemigos = FindObjectsOfType<Enemigo>();
+        foreach (Enemigo enemigo in enemigos)
+        {
+            Debug.Log("Cambio gravedad y orientación de los enemigos");
+            enemigo.SwitchGravity();
+        }
     }
+
 
     void movimiento()
     {
