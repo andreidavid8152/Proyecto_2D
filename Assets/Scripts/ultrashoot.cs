@@ -24,7 +24,7 @@ public class ultrashoot : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy") && gameObject.CompareTag("PlayerBullet"))
+        if (other.CompareTag("Enemy") && gameObject.CompareTag("UltraBallet"))
         {
             Enemigo enemigo = other.GetComponent<Enemigo>();
             if (enemigo != null)
@@ -32,6 +32,11 @@ public class ultrashoot : MonoBehaviour
                 enemigo.RecibirDanio(damage); // Aplicar daño al enemigo
                 Destroy(gameObject); // Destruir la bala al impactar
             }
+        }
+        else if (other.CompareTag("EnemyBullet") && gameObject.CompareTag("UltraBallet"))
+        {
+            Debug.Log("chocando");
+            Destroy(other.gameObject); // Destruir la otra bala
         }
     }
 

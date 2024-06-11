@@ -326,7 +326,7 @@ public class Personaje : MonoBehaviour
 
         // Instanciar el objeto UltraShoot
         GameObject bullet = Instantiate(UltraShootPrefab, bulletPosition, Quaternion.identity); // Asegúrate de tener un prefab para UltraShoot
-        bullet.tag = "PlayerBullet";
+        bullet.tag = "UltraBallet";
         bullet.GetComponent<ultrashoot>().setDirection(direction);
 
         // Aplica el recoil aquí después de disparar
