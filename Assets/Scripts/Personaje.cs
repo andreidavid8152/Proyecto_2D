@@ -14,6 +14,7 @@ public class Personaje : MonoBehaviour
     public GameObject UltraShootPrefab;
     public AudioClip sonidoRecibirDanio;
     public bool isDead = false; // Agregar esta línea para la variable isDead
+    private SpriteRenderer spriteRenderer;
 
 
     private bool canSwitchGravity = false;
@@ -56,6 +57,7 @@ public class Personaje : MonoBehaviour
         saltosRestantes = saltosMaximos;
         animator = GetComponent<Animator>();
         Physics2D.gravity = new Vector2(0, -9.8f); // Gravedad normal al inicio
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -450,6 +452,22 @@ public class Personaje : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f); // Espera 2 segundos para que se vea la animación de morir
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reinicia el nivel
+    }
+
+    public void ChangeColor(Color newColor)
+    {
+        if (spriteRenderer != null)
+        {
+            StartCoroutine(FlashColor(newColor));
+        }
+    }
+
+    private IEnumerator FlashColor(Color newColor)
+    {
+        Color originalColor = spriteRenderer.color;
+        spriteRenderer.color = newColor;
+        yield return new WaitForSeconds(0.5f); // Duración del cambio de color
+        spriteRenderer.color = originalColor;
     }
 
 }

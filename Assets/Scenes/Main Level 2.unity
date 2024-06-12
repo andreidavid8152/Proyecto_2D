@@ -22227,6 +22227,7 @@ MonoBehaviour:
   UltraShootPrefab: {fileID: 8098661509718357635, guid: 71417955ee99f944b8dfa0419e7cdd95, type: 3}
   sonidoRecibirDanio: {fileID: 8300000, guid: 4c36a043621fffe4b9ad6a85d5641ab3, type: 3}
   isDead: 0
+  efectoExplosion: {fileID: 139366, guid: b185c1a9cf067374586d095111b15bd1, type: 3}
   jumpEffect: {fileID: 362216033}
   runEffect: {fileID: 1694620926}
   dropEffect1: {fileID: 1911364611}

@@ -9,6 +9,7 @@ public class GravityPowerUp : MonoBehaviour
         {
             AudioManager.Instance.ReproducirSonido(sonidoPowerUp);
             collision.gameObject.GetComponent<Personaje>().EnableGravitySwitch();
+            collision.gameObject.GetComponent<Personaje>().ChangeColor(Color.gray);
             Destroy(gameObject); // Destruye el power-up después de ser recogido
         }
     }

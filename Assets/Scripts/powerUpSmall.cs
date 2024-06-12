@@ -11,6 +11,7 @@ public class powerUpSmall : MonoBehaviour
         {
             AudioManager.Instance.ReproducirSonido(sonidoPowerUp);
             collision.gameObject.GetComponent<Personaje>().ChangeSize(false);
+            collision.gameObject.GetComponent<Personaje>().ChangeColor(Color.magenta);
             Destroy(gameObject); // Destruye el power-up después de ser recogido
         }
     }

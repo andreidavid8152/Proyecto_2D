@@ -15,6 +15,7 @@ public class powerUpDobleShoot : MonoBehaviour
             if (personaje != null)
             {
                 personaje.EnableDoubleShoot(); // Permite la activación del doble disparo
+                personaje.ChangeColor(Color.yellow);
                 Destroy(gameObject); // Destruir el power-up después de recogerlo
             }
         }

@@ -19,6 +19,7 @@ public class Enemigo : MonoBehaviour
     public GameObject efectoExplosion;
 
     private bool gravityInverted = false;
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
@@ -26,6 +27,7 @@ public class Enemigo : MonoBehaviour
         lastShotTime = -cooldown;
         vidas = maxVidas;
         GameManager.Instance.RegistrarEnemigo(barraSalud); // Registra el enemigo en el GameManager
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void SwitchGravity()
@@ -76,6 +78,11 @@ public class Enemigo : MonoBehaviour
     {
         AudioManager.Instance.ReproducirSonido(sonidoRecibirDanio);
         vidas -= damage;
+        if (spriteRenderer != null)
+        {
+            StartCoroutine(FlashRed());
+        }
+
         Debug.Log(vidas);
         if (vidas < 0)
         {
@@ -90,6 +97,13 @@ public class Enemigo : MonoBehaviour
         }
     }
 
+    private IEnumerator FlashRed()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f); // Duración del cambio de color
+        spriteRenderer.color = Color.white;
+    }
+
     private void OnDestroy()
     {
         GameManager.Instance.EliminarEnemigo(barraSalud); // Elimina el enemigo del GameManager al ser destruido
@@ -99,7 +113,7 @@ public class Enemigo : MonoBehaviour
     {
         Instantiate(efectoExplosion, transform.position, Quaternion.identity);
         AudioManager.Instance.ReproducirSonido(explosionSonido);
-        cinemachineMovimientoCamara.Instance.MoverCamara(5, 5, 0.5f);
+        cinemachineMovimientoCamara.Instance.MoverCamara(8, 5, 0.8f);
     }
 
 }

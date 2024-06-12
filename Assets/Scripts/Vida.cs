@@ -13,6 +13,7 @@ public class Vida : MonoBehaviour
             if (vidaRecuperada)
             {
                 AudioManager.Instance.ReproducirSonido(sonidoRecogerVida);
+                other.gameObject.GetComponent<Personaje>().ChangeColor(new Color(1, 0.5f, 0.5f));
                 Destroy(gameObject);
             }
         }
