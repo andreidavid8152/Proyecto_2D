@@ -97,9 +97,9 @@ public class Enemigo : MonoBehaviour
 
     public void explosion()
     {
+        Instantiate(efectoExplosion, transform.position, Quaternion.identity);
         AudioManager.Instance.ReproducirSonido(explosionSonido);
         cinemachineMovimientoCamara.Instance.MoverCamara(5, 5, 0.5f);
-        Instantiate(efectoExplosion, transform.position, Quaternion.identity);
     }
 
 }
